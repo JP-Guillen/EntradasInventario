@@ -36,8 +36,6 @@ public class EntradasInventarioService(IDbContextFactory<ApplicationDbContext> D
                 producto.Existencia -= item.Cantidad;
             }
         }
-
-        await contexto.SaveChangesAsync();
     }
 
     private async Task<bool> Modificar(Entrada entrada)
