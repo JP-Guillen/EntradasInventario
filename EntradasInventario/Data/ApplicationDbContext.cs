@@ -9,4 +9,15 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Productos> Productos { get; set; }
     public DbSet<Entrada> Entradas { get; set; }
     public DbSet<EntradaDetalle> EntradaDetalles { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.Entity<Productos>()
+            .HasMany(p => p.EntradaDetalles)
+            .WithOne(d => d.Producto)
+            .HasForeignKey(d => d.ProductoId)
+            .OnDelete(DeleteBehavior.Restrict);
+    }
 }
