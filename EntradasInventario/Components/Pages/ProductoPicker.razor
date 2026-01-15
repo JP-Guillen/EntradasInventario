@@ -16,11 +16,10 @@
         <InputNumber class="form-control" @bind-Value="Cantidad" />
     </div>
 
-
     <div class="col-12 col-md-4">
         <label class="col-form-label">Costo:</label>
         <div class="input-group">
-            <InputNumber class="form-control" @bind-Value="Costo" />
+            <input type="number" class="form-control" value="@Costo" disabled readonly />
             <button type="button" class="btn btn-outline-success bi bi-plus" @onclick="TriggerSelection">Agregar</button>
         </div>
     </div>
@@ -43,11 +42,10 @@
     [Parameter]
     public int Cantidad { get; set; }
 
-    [Parameter]
-    public decimal Costo { get; set; }
+    public decimal Costo => Productos.FirstOrDefault(p => p.ProductoId == ProductoId)?.Costo ?? 0m;
 
     [Parameter]
-    public EventCallback<(Productos Productos, int Cantidad, decimal Precio)> OnProductoSelected { get; set; }
+    public EventCallback<(Productos Productos, int Cantidad, decimal Costo)> OnProductoSelected { get; set; }
 
     private string? errorMensaje { get; set; }
 
@@ -69,7 +67,7 @@
 
         if (Costo < 1)
         {
-            errorMensaje = "El precio debe ser mayor a 0.";
+            errorMensaje = "El costo debe ser mayor a 0.";
             return;
         }
 
@@ -79,6 +77,5 @@
 
         ProductoId = 0;
         Cantidad = 0;
-        Costo = 0;
     }
 }
