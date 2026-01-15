@@ -42,7 +42,6 @@
                     <ProductoPicker Productos="productos"
                                     ProductoId="entradaDetalleSeleccionado.ProductoId"
                                     Cantidad="entradaDetalleSeleccionado.Cantidad"
-                                    Costo="entradaDetalleSeleccionado.Costo"
                                     OnProductoSelected="HandleProductoSelected" />
 
                     <div class="table-responsive">
@@ -51,7 +50,7 @@
                                 <tr class="text-center">
                                     <th>Producto</th>
                                     <th>Cantidad</th>
-                                    <th>Precio unitario</th>
+                                    <th>Costo unitario</th>
                                     <th>Eliminar</th>
                                 </tr>
                             </thead>
@@ -125,7 +124,6 @@
 
         await Task.CompletedTask;
     }
-
 
     private async Task Guardar()
     {
